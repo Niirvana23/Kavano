@@ -1,24 +1,23 @@
-2- I did not understand what you meant by this question, If the purpose of security is to use the SSH protocol, we can use the following methods: 
+I did not understand what you meant by this question, If the purpose of security is to use the SSH protocol, we can use the following methods: 
 We have several solutions to secure our SSH connection:
-1-	As an immediately work, we need to change Default SSH port from 22 to custom port.
-For change this port we must edit ssh config file in /etc/ssh/ssh_config and change “Port 22” section to custom number of port that we want to set.
-2-	Use SSH key instead of password
-Actually, using a password is not secure way to connect server. We can use Certificate to create security and limited access of each user to the server. 
-
-We use the following method to create a certificate:
-Generate certificate with ssh-keygen command on host (in this method we can use another location for save Public and Private Key) 
-•	The most important thing is that we must use a password for our certificate
-      Copy public key to another server with ssh-copy-id command 
-•	Use it like this command:  ssh-copy-id [-i identity file] [-p port] [user]@hostname
-3-	Two-step authentication method
-	In this method, we can use the combination of two methods of password and verification by 	sending an SMS to the mobile phone or sending an email.
-	In this method we can used PAM (Google Authenticator) for install this module:
-	sudo apt install libpam-google-authenticator
-To make SSH use the Google Authenticator PAM module, add the following line to the /etc/pam.d/sshd file:
-auth required pam_google_authenticator.so
+     1-	As an immediately work, we need to change Default SSH port from 22 to custom port.
+	For change this port we must edit ssh config file in /etc/ssh/ssh_config and change “Port 22” section to custom number of port that we want to set.
+     2-	Use SSH key instead of password
+	Actually, using a password is not secure way to connect server. We can use Certificate to create security and limited access of each user to the server. 
+	We use the following method to create a certificate:
+	Generate certificate with ssh-keygen command on host (in this method we can use another location for save Public and Private Key) 
+		The most important thing is that we must use a password for our certificate
+      	Copy public key to another server with ssh-copy-id command 
+        	Use it like this command:  ssh-copy-id [-i identity file] [-p port] [user]@hostname
+     3-	Two-step authentication method
+	In this method, we can use the combination of two methods of password and verification by sending an SMS to the mobile phone or sending an email.
+	In this method we can used PAM (Google Authenticator)
+	To make SSH use the Google Authenticator PAM module, add the following line to the /etc/pam.d/sshd file:
+	auth required pam_google_authenticator.so
 	Now you need to restart the sshd daemon
 	After that we must to modify ChallengeResponseAuthentication in /etc/ssh/sshd_config file, 	change status from No to Yes.	
-But if the purpose is to hide the IP of the servers and not to access them from outside the network, we use the following methods.
-The above mentioned methods to secure the connection through SSH, but what we need to do to achieve the highest level of security is to use one of the following 2 methods:
-1-	SSH into the private server through Bastion Host
-2-	
+
+But if the purpose is to hide the IP of the servers and not to access them from outside the network and achieve the highest level of security,
+the following methods are recommended.
+	* SSH into the private server through Bastion Host
+

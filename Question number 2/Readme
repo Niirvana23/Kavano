@@ -1,4 +1,4 @@
-I did not understand what you meant by this question, If the purpose of security is to use the SSH protocol, we can use the following methods: 
+** I did not understand what you meant by this question, If the purpose of security is to use the SSH protocol, we can use the following methods: **
 We have several solutions to secure our SSH connection:
      1-	As an immediately work, we need to change Default SSH port from 22 to custom port.
 	For change this port we must edit ssh config file in /etc/ssh/ssh_config and change “Port 22” section to custom number of port that we want to set.
@@ -8,7 +8,8 @@ We have several solutions to secure our SSH connection:
 	Generate certificate with ssh-keygen command on host (in this method we can use another location for save Public and Private Key) 
 		The most important thing is that we must use a password for our certificate
       	Copy public key to another server with ssh-copy-id command 
-        	Use it like this command:  ssh-copy-id [-i identity file] [-p port] [user]@hostname
+        	Use it like this command:
+		``` ssh-copy-id [-i identity file] [-p port] [user]@hostname ```
      3-	Two-step authentication method
 	In this method, we can use the combination of two methods of password and verification by sending an SMS to the mobile phone or sending an email.
 	In this method we can used PAM (Google Authenticator)
@@ -17,7 +18,14 @@ We have several solutions to secure our SSH connection:
 	Now you need to restart the sshd daemon
 	After that we must to modify ChallengeResponseAuthentication in /etc/ssh/sshd_config file, 	change status from No to Yes.	
 
-But if the purpose is to hide the IP of the servers and not to access them from outside the network and achieve the highest level of security,
-the following methods are recommended.
-	* SSH into the private server through Bastion Host
+** But if the purpose is to hide the IP of the servers and not to access them from outside the network and achieve the highest level of security,
+	the following methods are recommended. ** 
+	* SSH into the private server through Bastion Host:
+	
+		In this method, the main server does not have access to the Internet and is used in a private network, in this case our server is protected from attacks through the Internet and outside the network.
+		For this, we use a proxy server to pass the internet traffic through this service and connect to main server via this.
+   			  ** Both of the declared methods are used for secure SSH connection between the proxy 	server and the primary server. **
+		For connect proxy server and after that connect to Main server we use below command:
+		``` Ssh –J “proxy server” “main server” ```
+		The IP range is related to the main server of the private range.
 

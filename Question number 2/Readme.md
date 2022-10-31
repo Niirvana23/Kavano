@@ -15,9 +15,12 @@ For change this port we must edit ssh config file in /etc/ssh/ssh_config and cha
 	In this method, we can use the combination of two methods of password and verification by sending an SMS to the mobile phone or sending an email.
 	In this method we can used PAM (Google Authenticator)
 	To make SSH use the Google Authenticator PAM module, add the following line to the /etc/pam.d/sshd file:
-	auth required pam_google_authenticator.so
-	Now you need to restart the sshd daemon
-	After that we must to modify ChallengeResponseAuthentication in /etc/ssh/sshd_config file, 	change status from No to Yes.	
+	
+	``` auth required pam_google_authenticator.so ```
+	 
+	Now you need to restart the sshd daemon.
+	
+	After that we must to modify ChallengeResponseAuthentication in /etc/ssh/sshd_config file, change status from No to Yes.	
 
 ### But if the purpose is to hide the IP of the servers and not to access them from outside the network and achieve the highest level of security,the following methods are recommended.
 #### SSH into the private server through Bastion Host:

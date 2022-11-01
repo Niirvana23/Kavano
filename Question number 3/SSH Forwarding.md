@@ -1,7 +1,13 @@
 The solution to this question is to use IPtable port forwarding:
 
 we used the bellow command for connecting server 1 and server 2 via port forwarding:
+First step we must run bellow command on each 2 server. Basically, iptables nat masquerade functions as a router:
 
+	``` iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE ```
+	
+	``` iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE ```
+
+	
 To allow Forward traffic between your public and private interfaces, run the following commands:
 		
 	``` iptables -A FORWARD -i eth1 -o eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT ```

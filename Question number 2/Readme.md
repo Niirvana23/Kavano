@@ -1,4 +1,3 @@
-###  I did not understand what you meant by this question, If the purpose of security is to use the SSH protocol, we can use the following methods:
 #### We have several solutions to secure our SSH connection:
 1. As immediate work, we need to change the Default SSH port from 22 to a custom port. To change this port we must edit an ssh config file in /etc/ssh/ssh_config and change the “Port 22” section to the custom number of the port that we want to set.
 2. Use SSH key instead of password
